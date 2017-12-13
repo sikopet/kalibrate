@@ -163,18 +163,19 @@ int c0_detect(usrp_source *u, int bi) {
 			}
 		} while(overruns);
 
+		printf("PRAGMA foreign_keys=OFF;");
+		printf("BEGIN TRANSACTION;");
+		printf("CREATE TABLE scanbts ( idscan TEXT PRIMARY KEY, arfcn TEXT, arfcnC0 TEXT, freq TEXT, txoffset TEXT, power TEXT);");
+
 		b = (complex *)ub->peek(&b_len);
 		r = l->scan(b, b_len, &offset, 0);
 		if(r && (fabsf(offset - GSM_RATE / 4) < ERROR_DETECT_OFFSET_MAX)) {
 			// found
-//			printf(STDOUTCLEAN "\tchan: %d (%.1fMHz ", i, freq / 1e6);
-//			display_freq(offset - GSM_RATE / 4);
-//			printf(")\tpower: %6.2lf\n", power[i]);
                         printf("INSERT INTO scanbts VALUES('");
                         print_time();
                         printf("', 'channel', '%d', '%.1fM','", i, freq / 1e6);
                         display_freq(offset - GSM_RATE / 4);
-                        printf("', '%6.2lf')\n", power[i]);
+                        printf("', '%6.2lf');\n", power[i]);
  			fflush(stdout);
 			notfound_count = 0;
 			i = next_chan(i, bi);
@@ -188,6 +189,8 @@ int c0_detect(usrp_source *u, int bi) {
 				j++;
 			}
 		}
+
+		printf("COMMIT;");
 
 	} while(i > 0);
 

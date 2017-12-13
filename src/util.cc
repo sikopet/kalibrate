@@ -39,7 +39,6 @@ void print_time()
 	time(&timer);
 	tm_info = localtime(&timer);
 	strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
-        srand(time(NULL));
         printf("%s %d",buffer,rand());
 }
 

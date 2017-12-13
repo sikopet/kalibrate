@@ -51,6 +51,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include <errno.h>
+#include <time.h>
 
 #include "usrp_source.h"
 #include "fcch_detector.h"
@@ -103,6 +104,7 @@ int main(int argc, char **argv) {
 	double freq = -1.0, fd;
 	usrp_source *u;
 
+	srand(time(NULL));
 	while((c = getopt(argc, argv, "f:c:s:b:R:A:g:F:xvDh?")) != EOF) {
 		switch(c) {
 			case 'f':
