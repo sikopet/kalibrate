@@ -52,11 +52,11 @@ void display_freq(float f) {
 		f = -f;
 	}
 	if(fabs(f) >= 1e9) {
-		printf("%.3fG", f / 1e9);
+		printf("%.3f", f / 1e9);
 		return;
 	}
 	if(fabs(f) >= 1e6) {
-		printf("%.1fM", f / 1e6);
+		printf("%.1f", f / 1e6);
 		return;
 	}
 	if(fabs(f) >= 1e3) {
