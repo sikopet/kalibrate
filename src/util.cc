@@ -52,26 +52,26 @@ void display_freq(float f) {
 		f = -f;
 	}
 	if(fabs(f) >= 1e9) {
-		printf("%.3fGHz", f / 1e9);
+		printf("%.3fG", f / 1e9);
 		return;
 	}
 	if(fabs(f) >= 1e6) {
-		printf("%.1fMHz", f / 1e6);
+		printf("%.1fM", f / 1e6);
 		return;
 	}
 	if(fabs(f) >= 1e3) {
-		printf("%.3fkHz", f / 1e3);
+		printf("%.3fk", f / 1e3);
 		return;
 	}
 	if(fabs(f) >= 1e2) {
-		printf("%.0fHz", f);
+		printf("%.0f", f);
 		return;
 	}
 	if(fabs(f) >= 1e1) {
-		printf(" %.0fHz", f);
+		printf(" %.0f", f);
 		return;
 	}
-	printf("  %.0fHz", f);
+	printf("  %.0f", f);
 }
 
 
