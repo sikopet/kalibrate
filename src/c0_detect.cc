@@ -132,6 +132,11 @@ int c0_detect(usrp_source *u, int bi) {
 		fprintf(stderr, "channel detect threshold: %lf\n", a);
 	}
 
+	printf("PRAGMA foreign_keys=OFF;\n");
+	printf("BEGIN TRANSACTION;\n");
+	printf("CREATE TABLE scanbts ( idscan TEXT PRIMARY KEY, arfcn TEXT, arfcnC0 TEXT, freq TEXT, txoffset TEXT, power TEXT);\n");
+	fflush(stdout);
+
 	// then we look for fcch bursts
 	found_count = 0;
 	notfound_count = 0;
@@ -163,11 +168,6 @@ int c0_detect(usrp_source *u, int bi) {
 			}
 		} while(overruns);
 
-		printf("PRAGMA foreign_keys=OFF;");
-		printf("BEGIN TRANSACTION;");
-		printf("CREATE TABLE scanbts ( idscan TEXT PRIMARY KEY, arfcn TEXT, arfcnC0 TEXT, freq TEXT, txoffset TEXT, power TEXT);");
-		fflush(stdout);
-
 		b = (complex *)ub->peek(&b_len);
 		r = l->scan(b, b_len, &offset, 0);
 		if(r && (fabsf(offset - GSM_RATE / 4) < ERROR_DETECT_OFFSET_MAX)) {
@@ -191,9 +191,10 @@ int c0_detect(usrp_source *u, int bi) {
 			}
 		}
 
-		printf("COMMIT;");
 
 	} while(i > 0);
+	printf("COMMIT;\n");
+	fflush(stdout);
 
 	return 0;
 }
