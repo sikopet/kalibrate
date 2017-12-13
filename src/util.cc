@@ -60,7 +60,7 @@ void display_freq(float f) {
 		return;
 	}
 	if(fabs(f) >= 1e3) {
-		printf("%.3fk", f / 1e3);
+		printf("%.3f", f / 1e3);
 		return;
 	}
 	if(fabs(f) >= 1e2) {
