@@ -28,4 +28,4 @@
 void display_freq(float f);
 void sort(float *b, unsigned int len);
 double avg(float *b, unsigned int len, float *stddev);
-void print_time;
+void print_time();
