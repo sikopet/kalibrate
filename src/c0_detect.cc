@@ -84,8 +84,10 @@ int c0_detect(usrp_source *u, int bi) {
 	u->flush();
 	j = 0;
 	for(i = first_chan(bi); i > 0; i = next_chan(i, bi)) {
-		printf(STDOUTCLEAN "%3d of %3d, Pass 1 of 2, %2.2f%%\r", j, amount_chan(bi), (float) 100*j/amount_chan(bi));
-		fflush(stdout);
+		if(g_verbosity > 2) {
+			printf(STDOUTCLEAN "%3d of %3d, Pass 1 of 2, %2.2f%%\r", j, amount_chan(bi), (float) 100*j/amount_chan(bi));
+			fflush(stdout);
+		}
 		freq = arfcn_to_freq(i, &bi);
 		if(!u->tune(freq)) {
 			fprintf(stderr, "error: usrp_source::tune\n");
@@ -137,8 +139,10 @@ int c0_detect(usrp_source *u, int bi) {
 	i = first_chan(bi);
 	j = 0;
 	do {
-		printf(STDOUTCLEAN "%3d of %3d, Pass 2 of 2, %2.2f%%\r", j, amount_chan(bi), (float) 100*j/amount_chan(bi));
-		fflush(stdout);
+		if(g_verbosity > 2) {
+			printf(STDOUTCLEAN "%3d of %3d, Pass 2 of 2, %2.2f%%\r", j, amount_chan(bi), (float) 100*j/amount_chan(bi));
+			fflush(stdout);
+		}
 		if(power[i] <= a) {
 			i = next_chan(i, bi);
 			j++;
