@@ -172,7 +172,7 @@ int c0_detect(usrp_source *u, int bi) {
 //			printf(")\tpower: %6.2lf\n", power[i]);
                         printf("INSERT INTO scanbts VALUES('");
                         print_time();
-                        printf("', 'channel', '%d', '%.1fMHz','", i, freq / 1e6);
+                        printf("', 'channel', '%d', '%.1fM','", i, freq / 1e6);
                         display_freq(offset - GSM_RATE / 4);
                         printf("', '%6.2lf')\n", power[i]);
  			fflush(stdout);
