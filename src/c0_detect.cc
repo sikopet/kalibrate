@@ -166,6 +166,7 @@ int c0_detect(usrp_source *u, int bi) {
 		printf("PRAGMA foreign_keys=OFF;");
 		printf("BEGIN TRANSACTION;");
 		printf("CREATE TABLE scanbts ( idscan TEXT PRIMARY KEY, arfcn TEXT, arfcnC0 TEXT, freq TEXT, txoffset TEXT, power TEXT);");
+		fflush(stdout);
 
 		b = (complex *)ub->peek(&b_len);
 		r = l->scan(b, b_len, &offset, 0);
